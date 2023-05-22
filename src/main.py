@@ -11,19 +11,19 @@ def main():
         input_main = int(input("Enter the main option: "))
     if input_main == 1:
         main_generate_digital_signature()
-        original_image = input("Enter the image target: ")
+        original_image = input("enter the painting image (.jpg): ")
         with open("message_with_signature.txt", "r") as file:
             message_content = file.read().strip()
         stego_image = embed_message(original_image, message_content)
         stego_image.save("result_image.png")
+        print("Stego-painting created successfully")
 
     elif input_main == 2:
-        stego_image = input("Enter the stego image that want to extract: ")
+        stego_image = input("Enter the painting image that want to extract: ")
         extracted_message = extract_message(stego_image)
         with open("extracted_message_from_image.txt", "w") as file:
             file.write(extracted_message)
         pubkey_file = input("Enter the public key file (.pem) : ")
-        # message_file = input("Enter the message file (.txt) : ")
         main_verify_digital_signature(pubkey_file=pubkey_file, message_file="extracted_message_from_image.txt")
 
 # Run the main function
